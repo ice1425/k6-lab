@@ -4,7 +4,7 @@
 
 - Step 0.1, http_req_duration: avg=288.34ms, min=288.34ms, med=288.34ms, max=288.34ms, p(90)=288.34ms, p(95)=288.34ms. All values are the same because the run made only one request (1 VU, 1 iteration). The check `status is 200` passed (1 out of 1).
 - Step 0.2, requests, rate and p(95), and why the rate stays below 5: 77 requests at 3.64 requests/s, p(95) = 284.83 ms. The rate stays below 5 because one iteration of a VU is not just one request. Each VU sends the request (about 0.28 s), then sleeps for 1 s, so one iteration takes about 1.28 s (iteration_duration med = 1.27 s). One VU therefore makes only about 1 / 1.28 ≈ 0.78 requests/s, and 5 VUs make about 3.9 requests/s. The measured rate is a little lower again (3.64/s) because the first iteration of each VU is slower while it opens the connection (iteration_duration max = 2.27 s), and K6 divides by the whole run time of 21.1 s rather than 20 s.
-- Step 0.6, exit code of the normal run and of the run with P95=300:
+- Step 0.6, exit code of the normal run and of the run with P95=300: The normal run passed all three thresholds (checks rate = 100.00%, p(95) = 394.72 ms < 1500 ms, http_req_failed = 0.00%) and the exit code was 0. With P95=300 the p(95) was 392.87 ms, so the rule p(95)<300 failed, K6 printed that the thresholds on http_req_duration had been crossed, and the exit code was 99. All checks still passed in that run, which shows that a threshold can fail a test even when every response is correct.
 - Step 0.7, rules that passed, p(95), p(99), exit code after your change:
 - Step 0.8, what was wrong, and how the checks showed it:
 
