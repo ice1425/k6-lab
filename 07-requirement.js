@@ -10,15 +10,14 @@ const PARAMS = {
 };
 
 const P95 = __ENV.P95 || 1000;
-const P99 = __ENV.P95 || 1500;
+const P99 = __ENV.P99 || 1500;
 
 export const options = {
   vus: 3,
   duration: '30s',
   thresholds: {
     http_req_failed: ['rate<0.01'],
-    http_req_duration: [`p(95)<${P95}`],
-    http_req_duration: [`p(99)<${P99}`],
+    http_req_duration: [`p(95)<${P95}`, `p(99)<${P99}`],
     checks: ['rate>0.99'],
   },
 };
