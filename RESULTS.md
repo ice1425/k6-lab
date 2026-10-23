@@ -12,7 +12,7 @@
 
 | Step | Test type    | Users | Req/s | p(95) | Max | Failed | Checks |
 | ---- | ------------ | ----- | ----- | ----- | --- | ------ | ------ |
-| A1   | Smoke        | 1     |       |       |     |        |        |
+| A1   | Smoke        | 1     | 0.51  | 421.32 ms | 553.53 ms | 0.00% | 100.00% |
 | A2   | Average load | 3     |       |       |     |        |        |
 | A3   | Stress       | 5     |       |       |     |        |        |
 | A4   | Spike        | 5     |       |       |     |        |        |
